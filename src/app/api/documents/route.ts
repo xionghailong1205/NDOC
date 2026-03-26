@@ -69,11 +69,9 @@ export async function POST(request: NextRequest) {
       .insert(documents)
       .values({
         title: title.trim(),
-        content: content || "",
+        content: content || null,
         categoryId: categoryId ? parseInt(categoryId) : null,
         tags: Array.isArray(tags) ? tags : [],
-        createdAt: new Date(),
-        updatedAt: new Date(),
       })
       .returning();
 

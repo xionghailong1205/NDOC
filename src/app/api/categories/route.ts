@@ -37,7 +37,6 @@ export async function POST(request: NextRequest) {
       .values({
         name: name.trim(),
         description: description || null,
-        createdAt: new Date(),
       })
       .returning();
 

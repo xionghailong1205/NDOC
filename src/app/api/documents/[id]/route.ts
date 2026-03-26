@@ -72,7 +72,7 @@ export async function PUT(
       .update(documents)
       .set({
         title: title.trim(),
-        content: content || "",
+        content: content || null,
         categoryId: categoryId ? parseInt(categoryId) : null,
         tags: Array.isArray(tags) ? tags : [],
         updatedAt: new Date(),

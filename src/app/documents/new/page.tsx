@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import type { Category } from "@/types";
+import { normalizeTag } from "@/lib/tags";
 
 export default function NewDocumentPage() {
   const router = useRouter();
@@ -24,7 +25,7 @@ export default function NewDocumentPage() {
   }, []);
 
   const addTag = () => {
-    const normalizedTag = tagInput.trim().toLowerCase().replace(/\s+/g, "-");
+    const normalizedTag = normalizeTag(tagInput);
     if (normalizedTag && !tags.includes(normalizedTag)) {
       setTags((prev) => [...prev, normalizedTag]);
     }
