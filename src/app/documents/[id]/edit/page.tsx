@@ -49,9 +49,9 @@ export default function EditDocumentPage() {
   }, [id]);
 
   const addTag = () => {
-    const tag = tagInput.trim().toLowerCase().replace(/\s+/g, "-");
-    if (tag && !tags.includes(tag)) {
-      setTags((prev) => [...prev, tag]);
+    const normalizedTag = tagInput.trim().toLowerCase().replace(/\s+/g, "-");
+    if (normalizedTag && !tags.includes(normalizedTag)) {
+      setTags((prev) => [...prev, normalizedTag]);
     }
     setTagInput("");
   };

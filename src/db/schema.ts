@@ -7,6 +7,7 @@ import {
   timestamp,
   json,
 } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
 
 export const categories = pgTable("categories", {
   id: serial("id").primaryKey(),
@@ -22,7 +23,7 @@ export const documents = pgTable("documents", {
   categoryId: integer("category_id").references(() => categories.id, {
     onDelete: "set null",
   }),
-  tags: json("tags").$type<string[]>().default([]),
+  tags: json("tags").$type<string[]>().default(sql`'[]'::json`),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });

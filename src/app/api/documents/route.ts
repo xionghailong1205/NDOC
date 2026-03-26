@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDb } from "@/db";
 import { documents, categories } from "@/db/schema";
-import { eq, ilike, or, and, isNull } from "drizzle-orm";
+import { eq, ilike, or, and, isNull, desc } from "drizzle-orm";
 
 export const dynamic = "force-dynamic";
 
@@ -43,7 +43,7 @@ export async function GET(request: NextRequest) {
       .from(documents)
       .leftJoin(categories, eq(documents.categoryId, categories.id))
       .where(conditions.length > 0 ? and(...conditions) : undefined)
-      .orderBy(documents.updatedAt);
+      .orderBy(desc(documents.updatedAt));
 
     return NextResponse.json(rows);
   } catch (error) {
